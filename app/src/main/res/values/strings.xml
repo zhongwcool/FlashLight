@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">FlashLight</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings" translatable="true">Settings</string>
+    <string name="content_description_about">default description</string>
+    <string name="version_default">Wechat 6.0.1</string>
+    <string name="title_change_log">What\'s New:</string>
+    <string name="title_setting_about">About</string>
+    <string name="title_setting_sound">Sound</string>
+    <string name="title_setting_vibrate">Vibrate</string>
+    <string name="title_touch_sound">Click Sound</string>
+    <string name="title_touch_vibrate">Click Vibrate</string>
+    <string name="summary_touch_sound">Play a sound when click flash light</string>
+    <string name="summary_touch_vibrate">Vibrate the phone when click flash light</string>
+    <string name="summary_about">Version information and Change logs.</string>
+</resources>

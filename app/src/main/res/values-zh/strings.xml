@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">手电筒</string>
+    <string name="summary_about">版本信息和变更说明。</string>
+    <string name="summary_touch_sound">点击手电时播放的提示音</string>
+    <string name="summary_touch_vibrate">点击手电时振动提示</string>
+    <string name="title_change_log">更新:</string>
+    <string name="title_setting_about">关于</string>
+    <string name="title_setting_sound">声音</string>
+    <string name="title_setting_vibrate">振动</string>
+    <string name="title_touch_sound">操作音</string>
+    <string name="title_touch_vibrate">振动反馈</string>
+    <string name="content_description_about">default description</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="version_default">手电筒 6.0.1</string>
+    <string name="action_settings">设置</string>
+</resources>

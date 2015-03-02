@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="Settings">
+
+    <PreferenceCategory
+        android:key="key_sound"
+        android:title="@string/title_setting_sound">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="preference_touch_sound"
+            android:summary="@string/summary_touch_sound"
+            android:title="@string/title_touch_sound"></CheckBoxPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="key_vibrator"
+        android:title="@string/title_setting_vibrate">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="preference_touch_vibrate"
+            android:summary="@string/summary_touch_vibrate"
+            android:title="@string/title_touch_vibrate"></CheckBoxPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/title_setting_about">
+        <PreferenceScreen
+            android:summary="@string/summary_about"
+            android:title="@string/title_setting_about">
+            <intent android:action="com.gst.alex.flashlight.intent.action.ABOUT" />
+        </PreferenceScreen>
+    </PreferenceCategory>
+
+</PreferenceScreen>
