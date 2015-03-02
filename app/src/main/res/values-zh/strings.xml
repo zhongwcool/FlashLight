@@ -14,4 +14,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="version_default">手电筒 6.0.1</string>
     <string name="action_settings">设置</string>
+    <string name="title_start_light_on">默认打开</string>
+    <string name="title_setting_light">默认打开</string>
+    <string name="summary_start_light_on">当应用开启时，默认打开或关闭闪光灯.</string>
 </resources>

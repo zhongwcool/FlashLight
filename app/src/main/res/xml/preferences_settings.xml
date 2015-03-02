@@ -3,6 +3,16 @@
     android:title="Settings">
 
     <PreferenceCategory
+        android:key="key_start_on"
+        android:title="@string/title_setting_light">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="preference_start_on"
+            android:summary="@string/summary_start_light_on"
+            android:title="@string/title_start_light_on"></CheckBoxPreference>
+        </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="key_sound"
         android:title="@string/title_setting_sound">
         <CheckBoxPreference

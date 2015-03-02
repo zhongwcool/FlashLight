@@ -32,14 +32,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         flashImage = (ImageView) findViewById(R.id.imageView);
         flashImage.setOnClickListener(this);
-        flashImage.setImageResource(R.drawable.flashlight_light_on);
 
-        camera = Camera.open();
-        Camera.Parameters camParameter = camera.getParameters();
-        camParameter.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-        camera.setParameters(camParameter);
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 
-        isFlashOn = true;
+        if(this.sharedPreferences.getBoolean("preference_start_on", true)) {
+            flashImage.setImageResource(R.drawable.flashlight_light_on);
+
+            camera = Camera.open();
+            Camera.Parameters camParameter = camera.getParameters();
+            camParameter.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            camera.setParameters(camParameter);
+
+            isFlashOn = true;
+        }else {
+            flashImage.setImageResource(R.drawable.flashlight_light_off);
+        }
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }

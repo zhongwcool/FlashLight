@@ -14,4 +14,7 @@
     <string name="summary_touch_sound">Play a sound when click flash light</string>
     <string name="summary_touch_vibrate">Vibrate the phone when click flash light</string>
     <string name="summary_about">Version information and Change logs.</string>
+    <string name="title_start_light_on">Start Light On/Off</string>
+    <string name="summary_start_light_on">Switch on/off flash light after app start.</string>
+    <string name="title_setting_light">Start Light </string>
 </resources>
