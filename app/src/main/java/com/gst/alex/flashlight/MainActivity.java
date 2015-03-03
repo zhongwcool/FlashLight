@@ -5,7 +5,10 @@ import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Camera;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
@@ -22,20 +25,37 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private Camera camera = null;
     private Vibrator vibrator = null;
     private SharedPreferences sharedPreferences = null;
+    private SoundPool soundpool = null;
+    private int touchSoundId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.layout_activity_main);
 
-        vibrator = (Vibrator) this.getApplication().getSystemService(Service.VIBRATOR_SERVICE);
+        // initial the Vibrator
+        vibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
+        // initial the SoundPool of latest android api lollipop and older api
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            AudioAttributes aa = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build();
+            soundpool = new SoundPool.Builder()
+                    .setMaxStreams(6)
+                    .setAudioAttributes(aa)
+                    .build();
+        }else {
+            soundpool = new SoundPool(6, AudioManager.STREAM_MUSIC, 0);
+        }
+        touchSoundId = soundpool.load(getApplicationContext(), R.raw.sound_touch_water_drop, 1);
 
         flashImage = (ImageView) findViewById(R.id.imageView);
         flashImage.setOnClickListener(this);
 
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        if(this.sharedPreferences.getBoolean("preference_start_on", true)) {
+        if(sharedPreferences.getBoolean("preference_start_on", true)) {
             flashImage.setImageResource(R.drawable.flashlight_light_on);
 
             camera = Camera.open();
@@ -70,6 +90,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if(camera != null) {
             camera.release();
         }
+
+        if(soundpool != null) {
+            soundpool.release();
+        }
     }
 
     @Override
@@ -99,9 +123,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         // vibrate for 300 millisecond to enhance human experience
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-        if(this.sharedPreferences.getBoolean("preference_touch_vibrate", true)) {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        if(sharedPreferences.getBoolean("preference_touch_vibrate", true)) {
             vibrator.vibrate(80);
+        }
+
+        if(isAudioNormal() && sharedPreferences.getBoolean("preference_touch_sound", true)) {
+            soundpool.play(touchSoundId, 1, 1, 0, 0, 1);
         }
 
         switch (v.getId()) {

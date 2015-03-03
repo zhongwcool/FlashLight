@@ -29,7 +29,7 @@ public class AboutActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_about);
+		setContentView(R.layout.layout_activity_about);
 		setTitle(R.string.title_setting_about);
 		
 		imageButton = (ImageButton) findViewById(R.id.imageButton_app);
