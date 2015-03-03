@@ -35,6 +35,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         // initial the Vibrator
         vibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
+
         // initial the SoundPool of latest android api lollipop and older api
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes aa = new AudioAttributes.Builder()

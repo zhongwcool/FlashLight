@@ -17,4 +17,6 @@
     <string name="title_start_light_on">Start Light On/Off</string>
     <string name="summary_start_light_on">Switch on/off flash light after app start</string>
     <string name="title_setting_light">Start Light</string>
+    <string name="title_setting_version">Version</string>
+    <string name="summary_version">Version information and Change logs</string>
 </resources>

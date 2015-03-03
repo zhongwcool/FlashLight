@@ -32,10 +32,10 @@
             android:title="@string/title_touch_vibrate"></CheckBoxPreference>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/title_setting_about">
+    <PreferenceCategory android:title="@string/title_setting_version">
         <PreferenceScreen
-            android:summary="@string/summary_about"
-            android:title="@string/title_setting_about">
+            android:summary="@string/summary_version"
+            android:title="@string/title_setting_version">
             <intent android:action="com.gst.alex.flashlight.intent.action.ABOUT" />
         </PreferenceScreen>
     </PreferenceCategory>

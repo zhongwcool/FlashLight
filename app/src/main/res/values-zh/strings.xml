@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">手电筒</string>
-    <string name="summary_about">版本信息和变更说明。</string>
+    <string name="summary_about">版本信息和变更说明</string>
     <string name="summary_touch_sound">点击手电时播放的提示音</string>
     <string name="summary_touch_vibrate">点击手电时振动提示</string>
     <string name="title_change_log">更新:</string>
@@ -15,6 +15,8 @@
     <string name="version_default">手电筒 0.0.1</string>
     <string name="action_settings">设置</string>
     <string name="title_start_light_on">默认开/关</string>
-    <string name="summary_start_light_on">当应用开启时，默认打开或关闭闪光灯.</string>
+    <string name="summary_start_light_on">当应用开启时，默认打开或关闭闪光灯</string>
     <string name="title_setting_light">启始灯光</string>
+    <string name="title_setting_version">版本</string>
+    <string name="summary_version">版本信息和变更说明</string>
 </resources>
