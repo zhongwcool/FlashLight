@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -37,7 +38,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         vibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
 
         // initial the SoundPool of latest android api lollipop and older api
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes aa = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_MEDIA)
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -46,7 +47,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     .setMaxStreams(6)
                     .setAudioAttributes(aa)
                     .build();
-        }else {
+        } else {
             soundpool = new SoundPool(6, AudioManager.STREAM_MUSIC, 0);
         }
         touchSoundId = soundpool.load(getApplicationContext(), R.raw.sound_touch_water_drop, 1);
@@ -56,16 +57,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        if(sharedPreferences.getBoolean("preference_start_on", true)) {
+        if (sharedPreferences.getBoolean("preference_start_on", true)) {
             flashImage.setImageResource(R.drawable.flashlight_light_on);
 
-            camera = Camera.open();
-            Camera.Parameters camParameter = camera.getParameters();
-            camParameter.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-            camera.setParameters(camParameter);
+            try {
+                camera = Camera.open();
+                Camera.Parameters camParameter = camera.getParameters();
+                camParameter.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                camera.setParameters(camParameter);
+            } catch (RuntimeException e) {
+                Toast.makeText(this, "can't open camera", Toast.LENGTH_SHORT).show();
+                finish();
+                e.printStackTrace();
+            }
 
             isFlashOn = true;
-        }else {
+        } else {
             flashImage.setImageResource(R.drawable.flashlight_light_off);
         }
 
@@ -88,11 +95,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected void onDestroy() {
         super.onDestroy();
 
-        if(camera != null) {
+        if (camera != null) {
             camera.release();
         }
 
-        if(soundpool != null) {
+        if (soundpool != null) {
             soundpool.release();
         }
     }
@@ -125,17 +132,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         // vibrate for 300 millisecond to enhance human experience
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        if(sharedPreferences.getBoolean("preference_touch_vibrate", true)) {
+        if (sharedPreferences.getBoolean("preference_touch_vibrate", true)) {
             vibrator.vibrate(80);
         }
 
-        if(isAudioNormal() && sharedPreferences.getBoolean("preference_touch_sound", true)) {
+        if (isAudioNormal() && sharedPreferences.getBoolean("preference_touch_sound", true)) {
             soundpool.play(touchSoundId, 1, 1, 0, 0, 1);
         }
 
         switch (v.getId()) {
             case R.id.imageView: {
-                if(!isFlashOn) {
+                if (!isFlashOn) {
                     flashImage.setImageResource(R.drawable.flashlight_light_on);
 
                     camera = Camera.open();
@@ -144,7 +151,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     camera.setParameters(camParameter);
 
                     isFlashOn = true;
-                }else {
+                } else {
                     flashImage.setImageResource(R.drawable.flashlight_light_off);
 
                     Camera.Parameters cameraParameter = camera.getParameters();
@@ -154,7 +161,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
                     isFlashOn = false;
                 }
-            } break;
+            }
+            break;
 
             default:
                 break;
@@ -162,7 +170,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private boolean isAudioNormal() {
-        AudioManager mAudioManager = (AudioManager)this.getSystemService(Service.AUDIO_SERVICE);
+        AudioManager mAudioManager = (AudioManager) this.getSystemService(Service.AUDIO_SERVICE);
         return mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL;
     }
 }
