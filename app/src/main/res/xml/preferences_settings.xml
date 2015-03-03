@@ -36,7 +36,7 @@
         <PreferenceScreen
             android:summary="@string/summary_version"
             android:title="@string/title_setting_version">
-            <intent android:action="com.gst.alex.flashlight.intent.action.ABOUT" />
+            <intent android:action="com.gst.alex.flashlight.intent.action.VERSION" />
         </PreferenceScreen>
     </PreferenceCategory>
 

@@ -28,14 +28,16 @@
         <activity
             android:name="com.gst.alex.flashlight.SettingsActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+
+            </activity>
 
         <activity
-            android:name="com.gst.alex.flashlight.AboutActivity"
+            android:name=".VersionActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="com.gst.alex.flashlight.intent.action.ABOUT" />
+                <action android:name="com.gst.alex.flashlight.intent.action.VERSION" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

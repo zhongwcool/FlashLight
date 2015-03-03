@@ -17,7 +17,7 @@ import android.widget.TextView;
  * @author alex
  *
  */
-public class AboutActivity extends Activity implements OnClickListener{
+public class VersionActivity extends Activity implements OnClickListener{
 	private ImageButton imageButton = null;
 	private TextView versionTextView = null;
 	private TextView changelogTextView = null;
@@ -29,8 +29,8 @@ public class AboutActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.layout_activity_about);
-		setTitle(R.string.title_setting_about);
+		setContentView(R.layout.layout_activity_version);
+		setTitle(R.string.title_setting_version);
 		
 		imageButton = (ImageButton) findViewById(R.id.imageButton_app);
 		imageButton.setOnClickListener(this);
