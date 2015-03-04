@@ -2,6 +2,7 @@ package com.gst.alex.flashlight;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -136,7 +138,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
 
             case R.id.action_about: {
-                new AlertDialog.Builder(this).setTitle(R.string.action_about).setMessage("Thank you! \nJust for funny!\n\nAlex.zhong").show();
+                Dialog ad = new Dialog(this);
+                ad.setTitle(R.string.action_about);
+                ad.setContentView(R.layout.layout_dialog_about);
+                ((TextView) ad.findViewById(R.id.tv_about)).setText(R.string.summary_about);
+                ad.show();
+
                 return true;
             }
 

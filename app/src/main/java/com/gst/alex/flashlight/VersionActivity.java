@@ -20,9 +20,9 @@ import android.widget.TextView;
 public class VersionActivity extends Activity implements OnClickListener{
 	private ImageButton imageButton = null;
 	private TextView versionTextView = null;
-	private TextView changelogTextView = null;
+	private TextView changeLogTextView = null;
 	
-	private String[] changelogs = new String[]{
+	private String[] changeLogs = new String[]{
 			"1、完成基本功能",};
 
 	@Override
@@ -35,7 +35,7 @@ public class VersionActivity extends Activity implements OnClickListener{
 		imageButton = (ImageButton) findViewById(R.id.imageButton_app);
 		imageButton.setOnClickListener(this);
 		versionTextView = (TextView) findViewById(R.id.textView_version);
-		changelogTextView = (TextView) findViewById(R.id.textView_changelog);
+		changeLogTextView = (TextView) findViewById(R.id.textView_changelog);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class VersionActivity extends Activity implements OnClickListener{
 			e.printStackTrace();
 		}
 		
-		changelogTextView.setText(getResources().getString(R.string.title_change_log) + "\n\n" +changelogs[0]);
+		changeLogTextView.setText(getResources().getString(R.string.title_change_log) + "\n\n" + changeLogs[0]);
 	}
 
 	@Override
