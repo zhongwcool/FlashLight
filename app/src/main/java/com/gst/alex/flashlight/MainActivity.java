@@ -1,6 +1,8 @@
 package com.gst.alex.flashlight;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -123,6 +125,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
             startActivity(intent);
 
             return true;
+        }
+
+        switch (item.getItemId()) {
+            case R.id.action_settings: {
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+
+                return true;
+            }
+
+            case R.id.action_about: {
+                new AlertDialog.Builder(this).setTitle(R.string.action_about).setMessage("Thank you! \nJust for funny!\n\nAlex.zhong").show();
+                return true;
+            }
+
         }
 
         return super.onOptionsItemSelected(item);

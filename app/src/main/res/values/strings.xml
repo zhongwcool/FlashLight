@@ -6,7 +6,7 @@
     <string name="content_description_about">default description</string>
     <string name="version_default">FlashLight 0.0.1</string>
     <string name="title_change_log">What\'s New:</string>
-    <string name="title_setting_about">About</string>
+    <string name="action_about">About</string>
     <string name="title_setting_sound">Sound</string>
     <string name="title_setting_vibrate">Vibrate</string>
     <string name="title_touch_sound">Click Sound</string>
