@@ -14,8 +14,8 @@ gen/
 
 # Gradle files
 .gradle/
-/.idea/workspace.xml
-/.idea/libraries
+.idea/workspace.xml
+.idea/libraries
 .DS_Store
 build/
 

@@ -155,7 +155,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         // vibrate for 300 millisecond to enhance human experience
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         if (sharedPreferences.getBoolean("preference_touch_vibrate", true)) {
             vibrator.vibrate(80);
         }
@@ -197,4 +197,5 @@ public class MainActivity extends Activity implements View.OnClickListener {
         AudioManager mAudioManager = (AudioManager) this.getSystemService(Service.AUDIO_SERVICE);
         return mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL;
     }
+
 }
