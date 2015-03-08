@@ -1,9 +1,7 @@
 package com.gst.alex.flashlight;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -36,7 +34,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_activity_main);
+        setContentView(R.layout.activity_main);
 
         // initial the Vibrator
         vibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
@@ -140,7 +138,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.action_about: {
                 Dialog ad = new Dialog(this);
                 ad.setTitle(R.string.action_about);
-                ad.setContentView(R.layout.layout_dialog_about);
+                ad.setContentView(R.layout.dialog_about);
                 ((TextView) ad.findViewById(R.id.tv_about)).setText(R.string.summary_about);
                 ad.show();
 

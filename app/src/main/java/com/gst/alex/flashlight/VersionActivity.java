@@ -29,7 +29,7 @@ public class VersionActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.layout_activity_version);
+		setContentView(R.layout.activity_version);
 		setTitle(R.string.title_setting_version);
 		
 		imageButton = (ImageButton) findViewById(R.id.imageButton_app);
