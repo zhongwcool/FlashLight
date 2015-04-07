@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,9 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.special.residemenu.ResideMenu;
+import com.special.residemenu.ResideMenuItem;
 
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -30,16 +34,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private SharedPreferences sharedPreferences = null;
     private SoundPool soundpool = null;
     private int touchSoundId;
+    private ResideMenu resideMenu;
+    private ResideMenuItem itemAbout;
+    private ResideMenuItem itemSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setupResideMenu();
+
         // initial the Vibrator
         vibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
 
-        // initial the SoundPool of latest android api lollipop and older api
+        // SoundPool and latest android api lollipop compatibility
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes aa = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -79,6 +88,27 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+
+    private void setupResideMenu() {
+        resideMenu = new ResideMenu(this);
+        resideMenu.setBackground(R.drawable.menu_background);
+        resideMenu.attachToActivity(this);
+        resideMenu.setMenuListener(menuListener);
+        resideMenu.setScaleValue(0.7f);
+
+        // create menu item
+        itemSettings = new ResideMenuItem(this, R.drawable.icon_settings, "Settings");
+        itemAbout = new ResideMenuItem(this, R.drawable.icon_profile, "About");
+
+        itemSettings.setOnClickListener(resideMenuItemClickListener);
+        itemAbout.setOnClickListener(resideMenuItemClickListener);
+
+        resideMenu.addMenuItem(itemSettings, ResideMenu.DIRECTION_LEFT);
+        resideMenu.addMenuItem(itemAbout, ResideMenu.DIRECTION_LEFT);
+
+        // You can disable a direction by setting ->
+        resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
     }
 
     @Override
@@ -195,5 +225,44 @@ public class MainActivity extends Activity implements View.OnClickListener {
         AudioManager mAudioManager = (AudioManager) this.getSystemService(Service.AUDIO_SERVICE);
         return mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL;
     }
+
+    private ResideMenu.OnMenuListener menuListener = new ResideMenu.OnMenuListener() {
+        @Override
+        public void openMenu() {
+            //Toast.makeText(MainActivity.this, "Menu is opened!", Toast.LENGTH_SHORT).show();
+            Log.d("ALEX", "Menu is opened");
+        }
+
+        @Override
+        public void closeMenu() {
+            //Toast.makeText(MainActivity.this, "Menu is closed!", Toast.LENGTH_SHORT).show();
+            Log.d("ALEX", "Menu is closed");
+        }
+    };
+
+    private View.OnClickListener resideMenuItemClickListener = new View.OnClickListener() {
+
+        /**
+         * Called when a view has been clicked.
+         *
+         * @param view The view that was clicked.
+         */
+        @Override
+        public void onClick(View view) {
+
+            if(view == itemSettings) {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            } else if(view == itemAbout) {
+                Dialog ad = new Dialog(MainActivity.this);
+                ad.setTitle(R.string.action_about);
+                ad.setContentView(R.layout.dialog_about);
+                ((TextView) ad.findViewById(R.id.tv_about)).setText(R.string.summary_about);
+                ad.show();
+            }
+
+            resideMenu.closeMenu();
+        }
+    };
 
 }
